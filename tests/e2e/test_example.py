@@ -62,7 +62,7 @@ def testAddEmployeeMismatchedPasswords(page: Page) -> None:
     page.locator('input[type="password"]').nth(1).click()
     page.locator('input[type="password"]').nth(1).fill("123456")
     page.get_by_role("button", name="Save").click()
-    expect(page.get_by_text("Passwords don't match")).to_be_visible()
+    expect(page.get_by_text("Passwords do not match")).to_be_visible()
 
 
 def testAddEmployeeSuccess(page: Page) -> None:
@@ -88,7 +88,7 @@ def testAddEmployeeWithExistId(page: Page) -> None:
 def testAddEmployeeWithInvalidAttachmentSize(page: Page) -> None:
     login(page)
     employeeDetails(page, "layal", "f", "888")
-    page.get_by_role("button", name="Choose File").set_input_files("attachments/b.jpg")
+    page.get_by_role("button", name="Choose File").set_input_files("../../attachments/b.jpg")
     page.locator("form").get_by_role("img", name="profile picture").click()
     page.get_by_role("button", name="Save").click()
     # fail
@@ -102,7 +102,7 @@ def testAddEmployeeWithValidAttachmentSize(page: Page) -> None:
     page.get_by_role("button", name="Choose File").set_input_files([])
     page.get_by_role("button").nth(4).click()
     page.get_by_role("button", name="Choose File").set_input_files(
-        "attachments/image.png"
+        "../../attachments/image.png"
     )
     page.get_by_role("button", name="Save").click()
     page.goto(
