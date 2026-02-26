@@ -20,6 +20,5 @@ def test_example(page: Page) -> None:
     page.get_by_role("textbox", name="Last Name").fill("hanani")
     page.get_by_role("button", name="Save").click()
     expect(page.locator("#oxd-toaster_1")).to_contain_text("Success")
-    page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewPersonalDetails/empNumber/210")
-    expect(page.locator("#app")).to_contain_text("Personal Details")
-
+    page.wait_for_url("**/pim/viewPersonalDetails/**", timeout=30000)
+    expect(page.get_by_role("heading", name="Personal Details")).to_be_visible()
