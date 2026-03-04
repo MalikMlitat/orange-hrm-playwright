@@ -8,3 +8,5 @@ dependencies = [
     "playwright>=1.58.0",
     "pytest-playwright>=0.7.2",
 ]
+[tool.pylint.messages_control]
+disable = ["missing-module-docstring", "missing-function-docstring"]
