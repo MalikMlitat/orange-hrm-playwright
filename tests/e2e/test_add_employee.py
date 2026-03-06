@@ -1,19 +1,18 @@
 from playwright.sync_api import Page
+from pages.login_page import LoginPage
+from pages.dashboard_page import DashboardPage
+from pages.add_employee_page import AddEmployeePage
 
 
-def test_example(page: Page) -> None:
-    page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
-    page.get_by_role("textbox", name="Username").click()
-    page.get_by_role("textbox", name="Username").fill("admin")
-    page.get_by_role("textbox", name="Password").click()
-    page.get_by_role("textbox", name="Password").fill("admin123")
-    page.get_by_role("button", name="Login").click()
-    page.get_by_role("link", name="PIM").click()
-    page.get_by_role("link", name="Add Employee").click()
-    page.get_by_role("textbox", name="First Name").click()
-    page.get_by_role("textbox", name="First Name").fill("hala")
-    page.get_by_role("textbox", name="Middle Name").click()
-    page.get_by_role("textbox", name="Middle Name").fill("abed")
-    page.get_by_role("textbox", name="Last Name").click()
-    page.get_by_role("textbox", name="Last Name").fill("shream")
-    page.get_by_role("button", name="Save").click()
+def test_add_employee(page: Page):
+
+    login = LoginPage(page)
+    dashboard = DashboardPage(page)
+    employee = AddEmployeePage(page)
+
+    login.navigate()
+    login.login("Admin", "admin123")
+
+    dashboard.go_to_pim()
+
+    employee.add_employee("hala", "abed", "shream")
