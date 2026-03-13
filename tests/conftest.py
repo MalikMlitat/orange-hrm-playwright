@@ -7,3 +7,4 @@ def goto(page: Page):
     """Fixture to navigate to the base URL."""
     base_url = "https://opensource-demo.orangehrmlive.com/"
     page.goto(base_url)
+
