@@ -10,3 +10,9 @@ dependencies = [
 ]
 [tool.pylint.messages_control]
 disable = ["missing-module-docstring", "missing-function-docstring"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "PT"]
