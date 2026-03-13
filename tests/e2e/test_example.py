@@ -2,6 +2,7 @@ import re
 from playwright.sync_api import Page, expect
 
 def test_login_to_orangehrm(page: Page):
+    page.pause()
 
     page.get_by_placeholder("Username").fill("Admin")
     page.get_by_placeholder("Password").fill("admin123")
