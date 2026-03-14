@@ -2,10 +2,13 @@ name: Playwright Tests CI
 
 on:
   push:
-    branches: [ main ]
+    branches: 
+      - main
+      - feature/ci-fixes   
   pull_request:
-    branches: [ main ]
-
+    branches: 
+      - main
+      - feature/ci-fixes
 jobs:
   test:
     runs-on: ubuntu-latest
