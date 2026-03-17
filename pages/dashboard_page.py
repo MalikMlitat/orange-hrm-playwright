@@ -9,3 +9,4 @@ class DashboardPage:
 
     def go_to_pim(self):
         self.pim_menu.click()
+        
