@@ -1,5 +1,5 @@
     
-
+from playwright.sync_api import  expect
 class AddEmployee :
     def __init__(self, page):
         self.page = page
@@ -7,6 +7,8 @@ class AddEmployee :
     def go_to_add_employee_page(self):
         self.page.get_by_role("link", name="PIM").click()
         self.page.get_by_role("button", name=" Add").click()   
+        
+        
     def fill_basic_info(self, first_name, middle_name, last_name, emp_id):
     
         self.page.get_by_role("textbox", name="First Name").click()
@@ -38,6 +40,11 @@ class AddEmployee :
 
     def save(self):
         self.page.get_by_role("button", name="Save").click()
+        
+        
+    def add_employee_ok (self):
+       expect(self.page.get_by_text("Successfully Saved")).to_be_visible(timeout=10000)
+    
 
        
 

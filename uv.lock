@@ -131,6 +131,7 @@ dependencies = [
     { name = "allure-pytest" },
     { name = "playwright" },
     { name = "pytest-playwright" },
+    { name = "ruff" },
 ]
 
 [package.dev-dependencies]
@@ -143,6 +144,7 @@ requires-dist = [
     { name = "allure-pytest", specifier = ">=2.15.3" },
     { name = "playwright", specifier = ">=1.58.0" },
     { name = "pytest-playwright", specifier = ">=0.7.2" },
+    { name = "ruff", specifier = ">=0.15.5" },
 ]
 
 [package.metadata.requires-dev]

@@ -3,7 +3,7 @@ import allure
 
 from pages.login_page import LoginPage
 from playwright.sync_api import Page
-
+from pages.add_vacancies import RecruitmentPage
 
 @pytest.fixture
 def logged_in_page(page: Page):
@@ -14,6 +14,7 @@ def logged_in_page(page: Page):
         LoginPage(page).login("Admin", "admin123")
 
     return page
+
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item):
     outcome = yield
@@ -28,3 +29,13 @@ def pytest_runtest_makereport(item):
                 name="failure-screenshot",
                 attachment_type=allure.attachment_type.PNG
             )
+
+@pytest.fixture
+def cleanup_vacancies(logged_in_page):
+    created = []  
+    yield created  
+    recruitment = RecruitmentPage(logged_in_page)
+    recruitment.open_vacancies()
+    for vacancy_name in created:
+        recruitment.delete_vacancy(vacancy_name)
+        recruitment.success_delete()
