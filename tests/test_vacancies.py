@@ -24,9 +24,9 @@ def vacancy_page(login_admin):
 @pytest.mark.parametrize(
     ("vacancy_name", "job_title", "manager", "active"),
     [
-        ("Job 1", "Account Assistant", "Orange Test", True),
-        ("Job 2", "Content Specialist", "Orange Test", False),
-        ("Job 3", "Financial Analyst", "Orange Test", True),
+        ("Job 1", "Account Assistant", "priya  crew", True),
+        ("Job 2", "Content Specialist", "priya  crew", False),
+        ("Job 3", "Financial Analyst", "priya  crew", True),
     ],
 )
 def test_add_vacancy(vacancy_page, vacancy_name, job_title, manager, active):

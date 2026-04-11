@@ -1,4 +1,6 @@
-from playwright.sync_api import Page
+import re
+
+from playwright.sync_api import Page, expect
 
 
 class VacancyPage:
@@ -44,10 +46,15 @@ class VacancyPage:
         if not active:
             active_toggle.click()
 
-        # Save
-        self.page.locator("button:has-text('Save')").click()
+        self.page.get_by_role("button", name="Save").click()
 
-        # Wait for success
-        self.page.locator(".oxd-toast").filter(has_text="Success").wait_for()
+        # Wait for navigation (robust way)
+        expect(self.page).to_have_url(re.compile(r".*/recruitment/addJobVacancy/\d+$"), timeout=10000)
 
         self._added_vacancies.append(vacancy_name)
+
+        self.page.get_by_role("link", name="Recruitment", exact=True).click()
+        self.page.get_by_role("link", name="Vacancies").click()
+        self.page.locator("h5:has-text('Vacancies')").wait_for(state="visible")
+
+        self.click_add()
