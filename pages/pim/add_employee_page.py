@@ -7,7 +7,13 @@ class AddEmployeePage:
     def __init__(self, page: Page):
         self.page = page
 
-    def add_employee_without_details(self, employee: Employee = Employee()):
+    def add_employee_without_details(self, employee: Employee = None):
+        if employee is None:
+            employee = Employee()
+
+        if employee.pic_path:
+            self.page.locator('input[type="file"]').set_input_files(employee.pic_path)
+            self.page.wait_for_timeout(5000)
         self.page.get_by_placeholder("First Name").fill(employee.first)
         self.page.get_by_placeholder("Middle Name").fill(employee.middle)
         self.page.get_by_placeholder("Last Name").fill(employee.last)
