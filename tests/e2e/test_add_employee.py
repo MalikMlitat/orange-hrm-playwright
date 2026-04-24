@@ -1,31 +1,19 @@
-from functools import wraps
 import random
 from playwright.sync_api import Page, expect
 from pages.add_empolyee import AddEmployee
 import pytest
 from pathlib import Path
 
-def pw_trace(step_name):
-    def decorator(func):
-        @wraps(func)  
-        def wrapper(*args, **kwargs):
-            logged_in_page = kwargs.get('logged_in_page') or (args[0] if args else None)
-            
-            if logged_in_page:
-                logged_in_page.context.tracing.group(step_name)
-            try:
-                return func(*args, **kwargs)  
-            finally:
-                if logged_in_page:
-                    logged_in_page.context.tracing.group_end()
-        return wrapper
-    return decorator
+from utils.decorators import pw_trace
+
 
 def generate_id():
     return str(random.randint(1000, 99999))
 
 # Get the fixture directory path
 FIXTURES_DIR = Path(__file__).parent/"fixtures"
+
+
 
 
 @pytest.mark.parametrize(
@@ -74,8 +62,6 @@ def test_add_valid_employees(logged_in_page: Page, first_name, last_name, emp_id
 def test_username_validation(logged_in_page: Page, user_name, password, confirm_pass, expected_result):
 
     add_employee = AddEmployee(logged_in_page)
-
-
     add_employee.go_to_add_employee_page()
     add_employee.fill_basic_info("Enas", "s", "n", generate_id())
     add_employee.enable_login_details(
