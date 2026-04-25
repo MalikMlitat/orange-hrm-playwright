@@ -1,0 +1,18 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(git commit*)",
+            "command": "cmd=$(jq -r '.tool_input.command'); if echo \"$cmd\" | grep -qE '^git commit'; then echo 'Running pre-commit checks...' >&2; uv run ruff check . && uv run pytest || { echo '{\"decision\":\"block\",\"reason\":\"Pre-commit checks failed (ruff or pytest). Fix the issues and try again.\"}'; exit 0; }; fi",
+            "timeout": 120,
+            "statusMessage": "Running ruff and pytest..."
+          }
+        ]
+      }
+    ]
+  }
+}
