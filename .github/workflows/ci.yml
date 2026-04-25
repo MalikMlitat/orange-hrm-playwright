@@ -38,7 +38,7 @@ jobs:
         run: uv run playwright install --with-deps chromium
 
       - name: Run tests
-        run: uv run pytest -n auto
+        run: uv run pytest -n auto --tracing=off --video=off
 
       - name: Upload test artifacts
         if: failure()
