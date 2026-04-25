@@ -12,6 +12,7 @@ class Employee:
     emp_number: int = None
     pic_path: str = None
 
+
 employee_1 = Employee()
 employee_1.first
 employee_1.last
