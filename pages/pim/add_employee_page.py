@@ -18,10 +18,12 @@ class AddEmployeePage:
         self.page.get_by_placeholder("Middle Name").fill(employee.middle)
         self.page.get_by_placeholder("Last Name").fill(employee.last)
 
-        employee_id_input = (self.page.get_by_text("Employee Id")
-                             .locator("..")
-                            .locator("..")
-                            .locator(".oxd-input"))
+        employee_id_input = (
+            self.page.get_by_text("Employee Id")
+            .locator("..")
+            .locator("..")
+            .locator(".oxd-input")
+        )
         init_id = employee_id_input.input_value()
         final_id = init_id + "_42"
         employee_id_input.fill(final_id)
