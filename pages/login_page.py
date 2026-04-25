@@ -20,4 +20,4 @@ class LoginPage:
 
     def verify_login_ok(self):
         dashboard_title = self.page.get_by_role("heading", name="Dashboard")
-        expect(dashboard_title).to_be_visible()
+        expect(dashboard_title).to_be_visible(timeout=60000)

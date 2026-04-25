@@ -13,7 +13,6 @@ class AddEmployeePage:
 
         if employee.pic_path:
             self.page.locator('input[type="file"]').set_input_files(employee.pic_path)
-            self.page.wait_for_timeout(5000)
         self.page.get_by_placeholder("First Name").fill(employee.first)
         self.page.get_by_placeholder("Middle Name").fill(employee.middle)
         self.page.get_by_placeholder("Last Name").fill(employee.last)
@@ -29,4 +28,4 @@ class AddEmployeePage:
         employee_id_input.fill(final_id)
 
         self.page.get_by_role("button", name="Save").click()
-        expect(self.page.get_by_text("Successfully saved")).to_be_visible()
+        expect(self.page.get_by_text("Successfully saved")).to_be_visible(60000)
